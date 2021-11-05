@@ -7,15 +7,15 @@ import {
   CardContent,
 
 } from '@material-ui/core';
-import Table from './Table';
+import Table from './components/Table';
 import {sortData} from './Util';
-import LineGraph from './LineGraph';
+import LineGraph from './components/LineGraph';
 import "leaflet/dist/leaflet.css";
 
 
 import './App.css';
-import InfoBox from './InfoBox';
-import Map from './Map';
+import InfoBox from './components/InfoBox';
+import Map from './components/Map';
 
 function App() {
   const [countries,setCountries]=useState([]);
