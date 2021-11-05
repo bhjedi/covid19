@@ -26,15 +26,16 @@ function App() {
   const[mapZoom,setMapZoom]=useState(3);
   const[mapCountries,setMapCountries]=useState([]);
   useEffect(()=>{
-    fetch("https://disease.sh/v3/covid-19/all")
+    fetch(process.env.REACT_APP_COUNTRY_INFO) 
     .then(response=> response.json())
     .then(data=>{
       setCountryInfo(data);
+      console.log(countryInfo)
     });
   },[])
   useEffect(()=>{
     const getCountriesData= async () => {
-      await fetch("https://disease.sh/v3/covid-19/countries")
+      await fetch(process.env.REACT_APP_COUNTRY_NAME)
       .then((response)=>response.json())
       .then((data)=>{
         const countries=data.map((country)=>(
@@ -47,7 +48,7 @@ function App() {
         setCountries(countries);
         setMapCountries(data);
         setTableData(sortedData);
-        
+        console.log(countries);
       });
     }
     getCountriesData();
@@ -57,9 +58,9 @@ function App() {
           const countryCode= event.target.value;
           console.log('yoooooo', countryCode);
           
-         const url= countryCode==='worldwide'? "https://disease.sh/v3/covid-19/all":
+         const url= countryCode==='worldwide'? process.env.REACT_APP_COUNTRY_INFO:
          
-         `https://disease.sh/v3/covid-19/countries/${countryCode}`; 
+         `${process.env.REACT_APP_COUNTRY_INFO}/${countryCode}`; 
           await fetch(url)
           .then((response)=>response.json())
           .then((data)=>{
